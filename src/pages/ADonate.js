@@ -32,7 +32,7 @@ function ADonate() {
 
   const handlePayment = async () => {
     try {
-      const orderUrl = "https://pc-server-chi.vercel.app/payment/orders";
+      const orderUrl = "https://pc-server-chi.vercel.app/api/payment/orders";
       const { data } = await axios.post(orderUrl, { amount: amount });
       console.log(data);
       initPayment(data.data)
