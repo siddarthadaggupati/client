@@ -11,15 +11,21 @@ function Donate() {
     setAmount(parseInt(event.target.value, 10));
   };
 
-  const handlePayment = async () => {
-    try {
-      const orderUrl = "https://pc-server-chi.vercel.app/api/payment/orders";
-      const { data } = await axios.post(orderUrl, { amount: amount });
-      console.log(data);
-      initPayment(data.data);
-    } catch (error) {
-      console.log(error);
-      // Handle errors here, e.g., display an error message to the user
+  const handlePayment = async (event) => {
+    event.preventDefault();
+    if(amount>0){
+      try {
+        const orderUrl = "https://pc-server-chi.vercel.app/api/payment/orders";
+        const { data } = await axios.post(orderUrl, { amount: amount });
+        console.log(data);
+        initPayment(data.data);
+      } catch (error) {
+        console.log(error);
+        // Handle errors here, e.g., display an error message to the user
+      }
+    }
+    else{
+      alert("Enter Valid Amount")
     }
   };
 
@@ -53,8 +59,9 @@ function Donate() {
       <div className="navbar">
         <Navbar />
       </div>
+      <h1 style={{backgroundColor:'#F07328', color:'white'}}>From Hunger to Hope <br />How Donations Fuel Our Mission</h1>
+        
       <div className="remaining">
-        <h1 style={{backgroundColor:'#F07328', color:'white'}}>From Hunger to Hope <br />How Donations Fuel Our Mission</h1>
         <div className="text">
           <div className="line">
             <h2>Donate & Support</h2>
@@ -64,8 +71,9 @@ function Donate() {
           By donating to our cause, you can help make a difference in the lives of these innocent creatures. Your generosity will enable us to continue our work rescuing and rehoming animals, as well as educating the public on the importance of pet adoption. <br />
           Please consider making a donation today and join us in our mission to create a better world for all dogs and cats.</p>
         </div>
-        <div className="donatecontainer">
+        <div className="donatecontanier">
           <br /><br />
+          <div>
           <form>
             <label htmlFor="name">Enter Your Name:</label> 
             <input type="text" id="name" /><br /><br />
@@ -75,6 +83,8 @@ function Donate() {
             </div> 
             <button className="calculate-btn" onClick={handlePayment}>Donate</button> 
           </form>
+          <br />
+          </div>
         </div>
       </div>
     </div>
