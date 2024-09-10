@@ -47,7 +47,7 @@ function Accessories() {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyurl = "https://localhost:8000/api/payment/verify";
+          const verifyurl = "https://pc-server-chi.vercel.app/api/payment/verify";
           const { data } = await axios.post(verifyurl, response);
           console.log(data);
         } catch (error) {
@@ -61,7 +61,7 @@ function Accessories() {
 
   const handlePayment = async () => {
     try {
-      const orderUrl = "http://localhost:8000/api/payment/orders";
+      const orderUrl = "https://pc-server-chi.vercel.app/api/payment/orders";
       const { data } = await axios.post(orderUrl, { amount: totalAmount });
       console.log(data);
       initPayment(data.data)
